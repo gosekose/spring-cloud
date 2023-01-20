@@ -1,0 +1,37 @@
+server:
+  port: 9002
+
+spring:
+  application:
+    name: catalog-service
+
+  datasource:
+    url: jdbc:h2:tcp://localhost/~/h2/h2db/catalog
+    username: sa
+    password:
+    driver-class-name: org.h2.Driver
+
+  jpa:
+    spring.jpa.database-platform: org.hibernate.dialect.H2Dialect
+    show-sql: true
+    hibernate:
+      ddl-auto: create
+    properties:
+      hibernate:
+        default_batch_fetch_size: 100
+        jdbc.batch_size: 20
+        format_sql: true
+    open-in-view: false
+
+eureka:
+  instance:
+    instance-id: ${spring.application.name}:${spring.application.instance_id:${random.value}}
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    service-url:
+      defaultZon: http://127.0.0.1:8761/eureka
+
+
+greeting:
+  message: welcome to the simple E-commerce
